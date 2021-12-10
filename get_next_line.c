@@ -3,16 +3,16 @@
 char	*after_new_line( char *buf)
 {
 	char	*remind;
-	int		i;
 	int		j;
 
 	j = 0;
-	i = ft_strlen(buf);
+	if (!buf)
+		return(NULL);
 	while (buf[j])
 	{
 		if (buf[j] == '\n')
 		{
-			remind = ft_substr(buf, j + 1, ft_strlen(buf) - j + 1);
+			remind = ft_substr(buf, j + 1, ft_strlen(buf));
 			free(buf);
 			return (remind);
 		}
@@ -26,7 +26,7 @@ char	*cut(char *buf)
 	int	j;
 
 	j = 0;
-	if (!buf)
+	if(!buf[0])
 		return (NULL);
 	while (buf[j] && buf[j] != '\n')
 		j++;
@@ -38,12 +38,15 @@ char	*get_line(int fd, char *buf)
 	int		i;
 
 	rsv = malloc (sizeof(char) * (BUFFER_SIZE + 1));
+	if(!rsv)
+		return NULL;
 	i = 1;
 	while (!checknewline(buf) && i)
 	{
 		i = read(fd, rsv, BUFFER_SIZE);
 		if (i == -1)
 		{
+			free(rsv);
 			return (NULL);
 		}
 		rsv[i] = '\0';
@@ -55,37 +58,32 @@ char	*get_line(int fd, char *buf)
 char	*get_next_line(int fd)
 {
 	int				i;
-	static char		*buf = NULL;
+	static char		*buf;
 	char			*line;
 
 	i = 0;
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return(NULL);
 	buf = get_line(fd, buf);
 	if (!buf)
 		return (NULL);
 	line = cut(buf);
 	buf = after_new_line(buf);
-	//char *s = buf;
-	//printf("\n %s <-", line);
-	i = ft_strlen(line);
-	if (i == 0)
-	{
-		free(line);
-		return(NULL);
-	}
 	return (line);
 }
-int main(void)
-{
-    int     fd;
 
-    fd = open("saber.txt", O_RDONLY);
+// int main(void)
+// {
+//     int     fd;
+
+//     fd = open("saber.txt", O_RDONLY);
     
-    printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-    return (0);
-}
+// 	printf("%s", get_next_line(fd));
+// 	printf("%s", get_next_line(fd));
+// 	// printf("%s", get_next_line(fd));
+// 	// printf("\n%s", get_next_line(fd));
+// 	// printf("%s", get_next_line(fd));
+
+
+//     return (0);
+// }
