@@ -1,15 +1,19 @@
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef     GET_NEXT_LINE_H
+# define     GET_NEXT_LINE_H
 
-# include <stdlib.h>
 # include <unistd.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include <string.h>
+# include <stddef.h>
+# include <ctype.h>
+# include <fcntl.h>
 
-
-
+int	    checknewline(char *str);
+int	    ft_strlen(char *str);
+char	*ft_strcat(char *dest, char *src);
+char	*ft_strcpy(char *dest, char *src);
+char	*ft_strjoin(char *s1, char *s2);
+char	*ft_substr(char *s, int start, unsigned int len);
 char	*get_next_line(int fd);
-
-char	*ft_strdup(const char *str);
-char	*ft_strchr(const char *str, int c);
-int		ft_strlen(const char *str);
-char	*ft_strjoin_modified(char const *s1, char const *s2, int len2);
 #endif
