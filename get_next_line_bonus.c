@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: schoukou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/11 02:03:36 by schoukou          #+#    #+#             */
-/*   Updated: 2021/12/11 03:26:14 by schoukou         ###   ########.fr       */
+/*   Created: 2021/12/11 02:08:10 by schoukou          #+#    #+#             */
+/*   Updated: 2021/12/11 03:26:28 by schoukou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*after_new_line( char *buf)
 {
@@ -51,7 +51,7 @@ char	*get_line(int fd, char *buf)
 	char	*rsv;
 	int		i;
 
-	rsv = malloc (sizeof (char) * (BUFFER_SIZE + 1));
+	rsv = malloc (sizeof(char) * (BUFFER_SIZE + 1));
 	if (!rsv)
 		return (NULL);
 	i = 1;
@@ -73,16 +73,16 @@ char	*get_line(int fd, char *buf)
 char	*get_next_line(int fd)
 {
 	int				i;
-	static char		*buf;
+	static char		*buf[1024];
 	char			*line;
 
 	i = 0;
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	buf = get_line(fd, buf);
-	if (!buf)
+	buf[fd] = get_line(fd, buf[fd]);
+	if (!buf[fd])
 		return (NULL);
-	line = cut(buf);
-	buf = after_new_line(buf);
+	line = cut(buf[fd]);
+	buf[fd] = after_new_line(buf[fd]);
 	return (line);
 }

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: schoukou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/11 02:10:14 by schoukou          #+#    #+#             */
-/*   Updated: 2021/12/11 02:11:08 by schoukou         ###   ########.fr       */
+/*   Created: 2021/12/11 02:11:16 by schoukou          #+#    #+#             */
+/*   Updated: 2021/12/11 02:12:48 by schoukou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 int	checknewline(char *str)
 {
